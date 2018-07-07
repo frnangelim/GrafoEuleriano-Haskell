@@ -1,6 +1,6 @@
 module Grafo where
 
-type Vertice = Double
+type Vertice = Integer
 type Aresta = (Vertice, Vertice)
 type Grafo = [Aresta]
 
@@ -25,6 +25,7 @@ adjacentes ((a,b):c) v
 
 -- Verifica se um elemento já existe em uma lista de tuplas
 -- Utilizado no metodo getVertices
+contains :: [Vertice] -> Integer -> Bool 
 contains [] elem = False
 contains (x:xs) elem = if x == elem then True else contains xs elem
 
@@ -52,6 +53,7 @@ grauPar (a:aux) grafo = if not ( length (adjacentes grafo (fst a)) `mod` 2 == 0)
 isGrauPar grafo = grauPar grafo grafo
 
 -- Verifica se o grau de todos os vértices de um grafo é no mínimo n/2, onde n = numero de vértices do grafo.
+dirac :: Grafo -> Grafo -> Int -> Bool
 dirac [] grafo verticesLength = True
 dirac (a:aux) grafo verticesLength = if length (adjacentes grafo (fst a)) >= (verticesLength `div` 2) &&
  length (adjacentes grafo (snd a)) >= (verticesLength `div` 2) then dirac aux grafo verticesLength else False
