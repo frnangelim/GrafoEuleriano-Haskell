@@ -6,11 +6,9 @@ type Grafo = [Aresta]
 
 
 -- Representação de um grafo desconexo
-grafo :: [Aresta]
-grafo = [
-		(1,2), (1,3), (1,4), (1,5),
-		(2,6), (2,7), (4,8), (5,9)
-	]
+grafoDesconexo :: [Aresta]
+grafoDesconexo = [(1,2), (1,3), (1,4), (1,5),
+		(2,6), (2,7), (4,8), (5,9)]
 
 -- Representação de um grafo conexo
 grafoConexo :: [Aresta]	
@@ -42,3 +40,13 @@ conexo :: Grafo -> Grafo -> Bool
 conexo [] grafo = True
 conexo (a:aux) grafo = if not ( length (adjacentes grafo (fst a)) > 1) then False else if not ( length (adjacentes grafo (snd a)) > 1) 
 	then False else conexo aux grafo
+
+isConexo grafo = conexo grafo grafo
+
+-- Verifica se todos vértices de um grafo possui grau par
+grauPar :: Grafo -> Grafo -> Bool
+grauPar [] grafo = True
+grauPar (a:aux) grafo = if not ( length (adjacentes grafo (fst a)) `mod` 2 == 0) then False else if not ( length (adjacentes grafo (snd a)) `mod` 2 == 0) 
+	then False else conexo aux grafo
+
+isGrauPar grafo = grauPar grafo grafo

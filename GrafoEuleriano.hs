@@ -11,6 +11,8 @@ module Main where
 
 import Grafo
 
+teoremaUm grafo = if Grafo.isConexo grafo && Grafo.isGrauPar grafo then True else False
+
 main :: IO()
 main = do
 	putStrLn "Insira um grafo para checar se ele é Euleriano"
