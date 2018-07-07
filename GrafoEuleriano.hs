@@ -11,7 +11,9 @@ module Main where
 
 import Grafo
 
-teoremaUm grafo = if Grafo.isConexo grafo && Grafo.isGrauPar grafo then True else False
+teoremaUm grafo = Grafo.isConexo grafo && Grafo.isGrauPar grafo
+
+teoremaQuatro grafo = Grafo.teoremaDeDirac grafo
 
 main :: IO()
 main = do
