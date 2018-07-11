@@ -11,6 +11,8 @@ module Main where
 
 import Grafo
 
+teoremaZero = Grafo.isConexo -- Se não for conexo, não é hamiltoniano
+
 teoremaUm grafo = Grafo.isConexo grafo && Grafo.isGrauPar grafo
 
 teoremaQuatro grafo = Grafo.teoremaDeDirac grafo
