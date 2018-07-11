@@ -14,6 +14,8 @@ grafoDesconexo = [(1,2), (1,3), (1,4), (1,5),
 grafoConexo :: [Aresta]	
 grafoConexo = [(1,2),(2,3),(3,1)]
 
+-- Representação de mais um grafo
+grafoTeste = [(1,2), (2,3), (3,4), (4,5), (5,1)]
 
 -- Obtem uma lista com todos vértices adjacentes a um dado vértice
 adjacentes :: Grafo -> Vertice -> [Vertice]
@@ -54,9 +56,9 @@ isGrauPar grafo = grauPar grafo grafo
 
 -- Verifica se o grau de todos os vértices de um grafo é no mínimo n/2, onde n = numero de vértices do grafo.
 
-dirac :: Grafo -> Grafo -> Int -> Bool -- verificar a divisão por 2, pois ela está truncando
+dirac :: Grafo -> Grafo -> Int -> Bool
 dirac [] grafo verticesLength = True
-dirac (a:aux) grafo verticesLength = if length (adjacentes grafo (fst a)) >= (verticesLength `div` 2) &&
- length (adjacentes grafo (snd a)) >= (verticesLength `div` 2) then dirac aux grafo verticesLength else False
+dirac (a:aux) grafo verticesLength = if fromIntegral (length (adjacentes grafo (fst a))) >= (fromIntegral verticesLength / 2.0) &&
+ fromIntegral (length (adjacentes grafo (snd a))) >= (fromIntegral verticesLength / 2.0) then dirac aux grafo verticesLength else False
 
 teoremaDeDirac grafo = dirac grafo grafo (length (getVertices grafo []))
