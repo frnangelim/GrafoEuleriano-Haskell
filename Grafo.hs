@@ -53,7 +53,8 @@ grauPar (a:aux) grafo = if not ( length (adjacentes grafo (fst a)) `mod` 2 == 0)
 isGrauPar grafo = grauPar grafo grafo
 
 -- Verifica se o grau de todos os vértices de um grafo é no mínimo n/2, onde n = numero de vértices do grafo.
-dirac :: Grafo -> Grafo -> Int -> Bool
+
+dirac :: Grafo -> Grafo -> Int -> Bool -- verificar a divisão por 2, pois ela está truncando
 dirac [] grafo verticesLength = True
 dirac (a:aux) grafo verticesLength = if length (adjacentes grafo (fst a)) >= (verticesLength `div` 2) &&
  length (adjacentes grafo (snd a)) >= (verticesLength `div` 2) then dirac aux grafo verticesLength else False
