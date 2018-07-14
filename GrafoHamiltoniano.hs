@@ -1,7 +1,7 @@
 module Main where
--- Teorema 1: Um grafo conexo G é um grafo euleriano se e somente se todo vértice de G possui grau par. 
+-- Teorema 1: Um grafo conexo G é um grafo hamiltoniano se e somente se todo vértice de G possui grau par. 
 
--- Teorema 2: Um grafo conexo G é um grafo euleriano se e somente se ele pode ser decomposto em circuitos. 
+-- Teorema 2: Um grafo conexo G é um grafo hamiltoniano se e somente se ele pode ser decomposto em circuitos. 
 
 -- Teorema 3: (Teorema de Ore) Uma condição suficiente (mas não necessária) para que um grafo G 
 -- seja hamiltoniano é que a soma dos graus de cada par de vértices não-adjacentes seja no mínimo n.
