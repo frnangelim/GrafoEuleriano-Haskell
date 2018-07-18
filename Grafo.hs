@@ -19,6 +19,8 @@ grafoTeste = [(1,2), (2,3), (3,4), (4,5), (5,1)]
 
 grafoTeste2 = [(1,3), (1,2), (2,3), (3,4), (3,5), (5,4)]
 
+grafoTeste3 = [(1,4),(1,2),(1,5),(5,3),(5,4),(4,3),(3,2)]
+
 -- Obtem uma lista com todos vértices adjacentes a um dado vértice
 adjacentes :: Grafo -> Vertice -> [Vertice]
 adjacentes [] _ = []
@@ -72,9 +74,16 @@ dirac (a:aux) grafo verticesLength = if fromIntegral (length (adjacentes grafo (
 
 teoremaDeDirac grafo = dirac grafo grafo (length (getVertices grafo []))
 
+sumGrausVertices grafo vertice [] = True
+sumGrausVertices grafo vertice (v:vertices) = if (sumGraus grafo v + sumGraus grafo vertice) >= length (getVertices grafo []) then sumGrausVertices grafo vertice vertices else False
 
--- Teorema 3: (Teorema de Ore) Uma condição suficiente (mas não necessária) para que um grafo G 
--- seja hamiltoniano é que a soma dos graus de cada par de vértices não-adjacentes seja no mínimo n.
+getNadjacentes grafo vertice = nadjacentes (adjacentes grafo vertice) (remove vertice (getVertices grafo []))
 
-ore :: Grafo -> Grafo -> Int -> Bool
-ore [] grafo verticesLength = True
+sumGraus [] vertice = 0
+sumGraus (x:xs) vertice = if(fst(x) == vertice) then 1 + sumGraus xs vertice else if(snd(x) == vertice) then 1 + sumGraus xs vertice else sumGraus xs vertice 
+
+ore grafo [] = True
+ore grafo (x:xs) = if (sumGrausVertices grafo (fst x) (getNadjacentes grafo (fst x))) && (sumGrausVertices grafo (snd x) (getNadjacentes grafo (snd x))) then ore grafo xs else False
+
+teoremaDeOre grafo = ore grafo grafo
+

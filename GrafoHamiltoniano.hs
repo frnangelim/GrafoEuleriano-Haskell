@@ -11,17 +11,24 @@ module Main where
 
 import Grafo
 
-teoremaZero = Grafo.isConexo -- Se não for conexo, não é hamiltoniano(verificar*)
+teoremaZero grafo = Grafo.isConexo grafo -- Se não for conexo, não é hamiltoniano(verificar*)
 
-teoremaUm grafo = Grafo.isConexo grafo && Grafo.isGrauPar grafo
-
-teoremaTres = Grafo.nadjacentes (Grafo.adjacentes Grafo.grafoTeste2 1) (Grafo.getVertices Grafo.grafoTeste2 [])
+teoremaTres grafo = Grafo.teoremaDeOre grafo
 
 teoremaQuatro grafo = Grafo.teoremaDeDirac grafo
+
+isHamiltoniano grafo = teoremaTres grafo
+
+boolToString True = "TRUE"
+boolToString False = "FALSE"
 
 main :: IO()
 main = do
 	putStrLn "Insira um grafo para checar se ele é Euleriano"
 	let input = ""
 	input <- getLine
-	putStrLn input
+
+	let result = isHamiltoniano input
+	let output = boolToString result
+
+	putStrLn output
