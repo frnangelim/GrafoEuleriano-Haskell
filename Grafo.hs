@@ -17,6 +17,8 @@ grafoConexo = [(1,2),(2,3),(3,1)]
 -- Representação de mais um grafo
 grafoTeste = [(1,2), (2,3), (3,4), (4,5), (5,1)]
 
+grafoTeste2 = [(1,3), (1,2), (2,3), (3,4), (3,5), (5,4)]
+
 -- Obtem uma lista com todos vértices adjacentes a um dado vértice
 adjacentes :: Grafo -> Vertice -> [Vertice]
 adjacentes [] _ = []
@@ -24,6 +26,13 @@ adjacentes ((a,b):c) v
 		| (a == v) = b:(adjacentes c v)
 		| (b == v) = a:(adjacentes c v)
 		| otherwise = adjacentes c v
+
+remove e (x:xs) | e == x = xs
+                | otherwise = x:(remove e xs)
+
+nadjacentes :: [Vertice] -> [Vertice] -> [Vertice]
+nadjacentes [] vertices = vertices
+nadjacentes (x:xs) (y:ys) = nadjacentes xs (remove x (y:ys))
 
 -- Verifica se um elemento já existe em uma lista de tuplas
 -- Utilizado no metodo getVertices
@@ -62,3 +71,10 @@ dirac (a:aux) grafo verticesLength = if fromIntegral (length (adjacentes grafo (
  fromIntegral (length (adjacentes grafo (snd a))) >= (fromIntegral verticesLength / 2.0) then dirac aux grafo verticesLength else False
 
 teoremaDeDirac grafo = dirac grafo grafo (length (getVertices grafo []))
+
+
+-- Teorema 3: (Teorema de Ore) Uma condição suficiente (mas não necessária) para que um grafo G 
+-- seja hamiltoniano é que a soma dos graus de cada par de vértices não-adjacentes seja no mínimo n.
+
+ore :: Grafo -> Grafo -> Int -> Bool
+ore [] grafo verticesLength = True

@@ -15,6 +15,8 @@ teoremaZero = Grafo.isConexo -- Se não for conexo, não é hamiltoniano(verific
 
 teoremaUm grafo = Grafo.isConexo grafo && Grafo.isGrauPar grafo
 
+teoremaTres = Grafo.nadjacentes (Grafo.adjacentes Grafo.grafoTeste2 1) (Grafo.getVertices Grafo.grafoTeste2 [])
+
 teoremaQuatro grafo = Grafo.teoremaDeDirac grafo
 
 main :: IO()
