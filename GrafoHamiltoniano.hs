@@ -10,6 +10,8 @@ module Main where
 -- seja hamiltoniano é que o grau de todo vértice de G seja no mínimo n/2, onde n é o número de vértices em G.
 
 import Grafo
+import Data.List.Split
+
 
 teoremaZero grafo = Grafo.isConexo grafo -- Se não for conexo, não é hamiltoniano(verificar*)
 
@@ -17,10 +19,13 @@ teoremaTres grafo = Grafo.teoremaDeOre grafo
 
 teoremaQuatro grafo = Grafo.teoremaDeDirac grafo
 
-isHamiltoniano grafo = teoremaTres grafo
+isHamiltoniano grafo = teoremaZero grafo && (teoremaTres grafo || teoremaQuatro grafo);
 
-boolToString True = "TRUE"
-boolToString False = "FALSE"
+boolToString True = "O grafo inserido eh hamiltoniano"
+boolToString False = "O grafo inserido nao eh hamiltoniano"
+
+convertToGrafo [] = []
+convertToGrafo (x:xs) = [( read (head (splitOn "," x)) :: Integer, read (head (tail (splitOn "," x))) :: Integer )] ++ convertToGrafo xs 
 
 main :: IO()
 main = do
@@ -28,7 +33,9 @@ main = do
 	let input = ""
 	input <- getLine
 
-	let result = isHamiltoniano input
+	let grafo = convertToGrafo (splitOn " " input);
+
+	let result = isHamiltoniano grafo
 	let output = boolToString result
 
-	putStrLn output
+	print output
