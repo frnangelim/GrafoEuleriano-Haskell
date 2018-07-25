@@ -1,25 +1,21 @@
 module Main where
--- Teorema 1: Um grafo conexo G é um grafo hamiltoniano se e somente se todo vértice de G possui grau par. 
-
--- Teorema 2: Um grafo conexo G é um grafo hamiltoniano se e somente se ele pode ser decomposto em circuitos. 
-
--- Teorema 3: (Teorema de Ore) Uma condição suficiente (mas não necessária) para que um grafo G 
+-- Teorema 1: (Teorema de Ore) Uma condição suficiente (mas não necessária) para que um grafo G 
 -- seja hamiltoniano é que a soma dos graus de cada par de vértices não-adjacentes seja no mínimo n.
 
--- Teorema 4: (Teorema de Dirac) Uma condição suficiente (mas não necessária) para que um grafo G 
+-- Teorema 2: (Teorema de Dirac) Uma condição suficiente (mas não necessária) para que um grafo G 
 -- seja hamiltoniano é que o grau de todo vértice de G seja no mínimo n/2, onde n é o número de vértices em G.
 
 import Grafo
-import Data.List.Split
+-- import Data.List.Split
 
+teoremaUm grafo = Grafo.teoremaDeOre grafo
 
-teoremaZero grafo = Grafo.isConexo grafo -- Se não for conexo, não é hamiltoniano(verificar*)
+teoremaDois grafo = Grafo.teoremaDeDirac grafo
 
-teoremaTres grafo = Grafo.teoremaDeOre grafo
+percorrerGrafo grafo = Grafo.caminharNoGrafo grafo
 
-teoremaQuatro grafo = Grafo.teoremaDeDirac grafo
+isHamiltoniano grafo =  if (teoremaUm grafo || teoremaDois grafo) then True else percorrerGrafo grafo
 
-isHamiltoniano grafo = teoremaZero grafo && (teoremaTres grafo || teoremaQuatro grafo);
 
 boolToString True = "O grafo inserido eh hamiltoniano"
 boolToString False = "O grafo inserido nao eh hamiltoniano"
@@ -37,5 +33,6 @@ main = do
 
 	let result = isHamiltoniano grafo
 	let output = boolToString result
+	let output = ""
 
 	print output

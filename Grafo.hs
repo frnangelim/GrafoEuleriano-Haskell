@@ -111,7 +111,8 @@ dividirCaminho grafo verticesCaminhados (x:xs) =
 
 percorrer grafo verticesCaminhados verticeAtual = let disponiveis = verticesDisponiveis grafo verticeAtual verticesCaminhados in
 	if (disponiveis) /= []
-	then dividirCaminho grafo (verticesCaminhados ++ [verticeAtual]) disponiveis else disponiveis -- no else vou verificar se é um circuito hamiltoniano
+	then dividirCaminho grafo (verticesCaminhados ++ [verticeAtual]) disponiveis 
+	else (compararVertices grafo (verticesCaminhados ++ [verticeAtual])) && (head (adjacentes grafo verticeAtual) == (fst (head grafo)))
 
 caminharNoGrafo grafo = percorrer grafo [] (fst (head grafo))
 
