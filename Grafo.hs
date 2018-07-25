@@ -88,6 +88,12 @@ ore grafo (x:xs) = if (sumGrausVertices grafo (fst x) (getNadjacentes grafo (fst
 teoremaDeOre grafo = ore grafo grafo
 
 
+-- Compara os vertices percorridos com todos os vertices do grafo
+compararAux vertices [] = True
+compararAux vertices (x:xs) = if (contains vertices x) then compararAux vertices xs else False
+
+compararVertices grafo verticesPercorridos = let grafoVertices = (getVertices grafo []) in (compararAux grafoVertices verticesPercorridos) && (length grafoVertices == length verticesPercorridos)
+
 
 -- Retorna apenas os vértices que não foram percorridos
 removerPercorridos [] percorridos = []
@@ -107,5 +113,5 @@ percorrer grafo verticesCaminhados verticeAtual = let disponiveis = verticesDisp
 	if (disponiveis) /= []
 	then dividirCaminho grafo (verticesCaminhados ++ [verticeAtual]) disponiveis else disponiveis -- no else vou verificar se é um circuito hamiltoniano
 
-caminharNoGrafo (x:xs) = percorrer (x:xs) [] (fst x)
+caminharNoGrafo grafo = percorrer grafo [] (fst (head grafo))
 
