@@ -87,3 +87,7 @@ ore grafo (x:xs) = if (sumGrausVertices grafo (fst x) (getNadjacentes grafo (fst
 
 teoremaDeOre grafo = ore grafo grafo
 
+percorrerGrafo grafo grafoVertices verticesCaminhados (x:xs) = adjacentes grafo (fst x)
+
+caminharNoGrafo (x:xs) = percorrerGrafo grafo (getVertices grafo []) (fst x) xs
+
