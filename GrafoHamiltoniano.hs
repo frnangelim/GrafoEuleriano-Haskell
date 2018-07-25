@@ -6,7 +6,7 @@ module Main where
 -- seja hamiltoniano é que o grau de todo vértice de G seja no mínimo n/2, onde n é o número de vértices em G.
 
 import Grafo
--- import Data.List.Split
+import Data.List.Split
 
 teoremaUm grafo = Grafo.teoremaDeOre grafo
 
@@ -33,6 +33,5 @@ main = do
 
 	let result = isHamiltoniano grafo
 	let output = boolToString result
-	let output = ""
 
 	print output
