@@ -1,7 +1,10 @@
 module Grafo where
 
+-- Representação de um Vértice.
 type Vertice = Integer
+-- Representação de uma Aresta.
 type Aresta = (Vertice, Vertice)
+-- Reperesentação de um Grafo.
 type Grafo = [Aresta]
 
 
