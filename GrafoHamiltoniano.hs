@@ -5,7 +5,7 @@ import Data.List.Split
 
 -- Definição de Grafo Hamiltoniano:
 -- Um grafo hamiltoniano é grafo que possui um caminho que permite passar por todos os vértices de um grafo G, 
--- não repetindo nenhum vertice.
+-- não repetindo nenhum vertice e formando um ciclo.
 
 -- Teorema 1: (Teorema de Ore) Uma condição suficiente (mas não necessária) para que um grafo G 
 -- seja hamiltoniano é que a soma dos graus de cada par de vértices não-adjacentes seja no mínimo n.
